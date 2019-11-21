@@ -42,7 +42,17 @@ public class TextAnalyzerMainApp {
         String[] w = worlds.split("\\s");
         return w.length;
     }
-
+    private static int generateLettersRaport() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+        String[] w = worlds.split("a");
+        return w.length;
+    }
     public static void main(String[] args) throws IOException {
         final int downloadFile = 1;
         final int countNumberOfLetters = 2;
@@ -91,12 +101,7 @@ public class TextAnalyzerMainApp {
                     //został pobrany, zwrócić błąd.
                     break;
                 case generateLettersRaport:
-                    //zad 6 TODO 6. [Student A] Wygeneruj raport o ilości poszczególnych liter w
-                    //pliku
-                    //Wypisać na ekran listę:
-                    //A: 13
-                    //B: 124
-                    //C: ..
+                    System.out.println(generateLettersRaport());
                     break;
                 case saveStats:
                     //zad 7 TODO 7. [Student C] Zapisać plik ze statystykami.
