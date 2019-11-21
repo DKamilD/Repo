@@ -102,9 +102,17 @@ public class TextAnalyzerMainApp {
                     //zad 8 TODO [Student B] Wyjście
                     //Zakończyć program, usunąć plik tekstowy z punktu 1. (o ile był zapisany)
                     //i usunąć plik statystyki.txt (o ile był zapisany).
-
+                    deleteFile("D:\\Users\\oem\\ProjektZGita\\plik.txt");
 
             }
         }
+    }
+
+    public static void deleteFile(String filePath) {
+        File file = new File(filePath);
+        if (file == null) {
+            throw new NullPointerException("File not exist");
+        }
+        file.delete();
     }
 }
