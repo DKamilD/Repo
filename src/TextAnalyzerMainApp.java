@@ -10,14 +10,14 @@ public class TextAnalyzerMainApp {
 
         URL website = new URL("https://s3.zylowski.net/public/input/7.txt");
         try (InputStream in = website.openStream()) {
-            Files.copy(in, Path.of("D:\\Users\\oem\\ProjektZGita\\plik.txt"));
+            Files.copy(in, Path.of("plik.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static int countWords() {
-        String file = "D:\\Users\\oem\\ProjektZGita\\plik.txt";
+        String file = "plik.txt";
         String worlds = null;
         try {
             worlds = new String(Files.readAllBytes(Path.of(file)));
@@ -102,7 +102,7 @@ public class TextAnalyzerMainApp {
                     //zad 8 TODO [Student B] Wyjście
                     //Zakończyć program, usunąć plik tekstowy z punktu 1. (o ile był zapisany)
                     //i usunąć plik statystyki.txt (o ile był zapisany).
-                    deleteFile("D:\\Users\\oem\\ProjektZGita\\plik.txt");
+                    deleteFile("plik.txt");
 
             }
         }
