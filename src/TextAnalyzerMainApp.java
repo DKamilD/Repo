@@ -1,7 +1,24 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class TextAnalyzerMainApp {
-    public static void main(String[] args) {
+    private static void downloadFile() throws MalformedURLException {
+
+        URL website = new URL("https://s3.zylowski.net/public/input/7.txt");
+        try (InputStream in = website.openStream()) {
+            Files.copy(in, Path.of("D:\\Users\\oem\\ProjektZGita\\plik.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args) throws MalformedURLException {
         final int downloadFile = 1;
         final int countNumberOfLetters = 2;
         final int countNumberOfWords = 3;
@@ -12,8 +29,11 @@ public class TextAnalyzerMainApp {
         final int exit = 0;
         Scanner input = new Scanner(System.in);
         int option = -1;
-
-        while (option !=exit) {
+        /*
+        Pobieranie pliku z internetu.
+         */
+        downloadFile();
+        while (option != exit) {
             System.out.println("Options: ");
             System.out.println("0 - Exit");
             System.out.println("1 - Download file from Internet");
@@ -28,13 +48,12 @@ public class TextAnalyzerMainApp {
             System.out.println("Pick option: ");
             option = input.nextInt();
             input.nextLine();
-
             switch (option) {
                 case downloadFile:
                     //Zad 1 TODO:[Student B] Pobieranie pliku z internetu
                     //Każda grupa otrzyma adres pliku tekstowego. Adres ten ma zostać
                     //‘zahardkodowany’ w aplikacji i aplikacja ma pobierać ten plik przy
-                    //każdym uruchomieniu.
+
                     break;
                 case countNumberOfLetters:
                     //Zad 2 TODO:[Student A] Liczba liter
