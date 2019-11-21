@@ -1,4 +1,8 @@
-import java.io.*;
+package src;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -16,13 +20,24 @@ public class TextAnalyzerMainApp {
         }
     }
 
+    private static int countChars() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+        String[] w = worlds.split("");
+        return w.length;
+    }
     private static int countWords() {
         String file = "plik.txt";
         String worlds = null;
         try {
             worlds = new String(Files.readAllBytes(Path.of(file)));
         } catch (IOException e) {
-            throw new NullPointerException("Nie znaleziono pliku");
+            throw new NullPointerException("File not found");
         }
         String[] w = worlds.split("\\s");
         return w.length;
@@ -39,10 +54,7 @@ public class TextAnalyzerMainApp {
         final int exit = 0;
         Scanner input = new Scanner(System.in);
         int option = -1;
-        /*
-        Pobieranie pliku z internetu.
-         */
-        downloadFile();
+
         while (option != exit) {
             System.out.println("Options: ");
             System.out.println("0 - Exit");
@@ -60,20 +72,12 @@ public class TextAnalyzerMainApp {
             input.nextLine();
             switch (option) {
                 case downloadFile:
-                    //Zad 1 TODO:[Student B] Pobieranie pliku z internetu
-                    //Każda grupa otrzyma adres pliku tekstowego. Adres ten ma zostać
-                    //‘zahardkodowany’ w aplikacji i aplikacja ma pobierać ten plik przy
-
+                    downloadFile();
                     break;
                 case countNumberOfLetters:
-                    //Zad 2 TODO:[Student A] Liczba liter
-                    //Wypisać na ekran ile liter znajduje się w pobranym pliku. Jeśli plik nie
-                    //został pobrany, zwrócić błąd.
+                    System.out.println(countChars());
                     break;
                 case countNumberOfWords:
-                    //zad 3 TODO 3. [Student B] Liczba wyrazów
-                    //Wypisać na ekran ile wyrazów znajduje się w pobranym pliku. Jeśli plik
-                    //nie został pobrany, zwrócić błąd.
                     System.out.println(countWords());
                     break;
                 case countNumberOfPunctuationMarks:
@@ -103,7 +107,10 @@ public class TextAnalyzerMainApp {
                     //Zakończyć program, usunąć plik tekstowy z punktu 1. (o ile był zapisany)
                     //i usunąć plik statystyki.txt (o ile był zapisany).
                     deleteFile("plik.txt");
-
+                    System.out.println("You've deleted the file");
+                    break;
+                default:
+                    System.out.println("Pick upper options");
             }
         }
     }
