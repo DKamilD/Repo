@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -15,10 +14,21 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static void main(String[] args) throws MalformedURLException {
+    private static int countWords() {
+        String file = "D:\\Users\\oem\\ProjektZGita\\plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("Nie znaleziono pliku");
+        }
+        String[] w = worlds.split("\\s");
+        return w.length;
+    }
+
+    public static void main(String[] args) throws IOException {
         final int downloadFile = 1;
         final int countNumberOfLetters = 2;
         final int countNumberOfWords = 3;
@@ -64,6 +74,7 @@ public class TextAnalyzerMainApp {
                     //zad 3 TODO 3. [Student B] Liczba wyrazów
                     //Wypisać na ekran ile wyrazów znajduje się w pobranym pliku. Jeśli plik
                     //nie został pobrany, zwrócić błąd.
+                    System.out.println(countWords());
                     break;
                 case countNumberOfPunctuationMarks:
                     //zad 4 TODO 4. [Student C] Liczba znaków interpunkcyjnych
