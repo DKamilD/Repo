@@ -51,6 +51,7 @@ public class TextAnalyzerMainApp {
     }
 
     private static void generateLettersRaport() {
+        final int MAX_CHAR = 256;
         String file = "plik.txt";
         String worlds = null;
         try {
@@ -58,9 +59,24 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
+        int count[] = new int[MAX_CHAR];
+        int len = worlds.length();
+        for (int i = 0; i < len; i++)
+            count[worlds.charAt(i)]++;
+        char ch[] = new char[worlds.length()];
+        for (int i = 0; i < len; i++) {
+            ch[i] = worlds.charAt(i);
+            int find = 0;
+            for (int j = 0; j <= i; j++) {
 
-        //String[] w = worlds.split("a");
-        //return w.length;
+                if (worlds.charAt(i) == ch[j])
+                    find++;
+            }
+
+            if (find == 1)
+                System.out.println("Number of Occurrence of " +
+                        worlds.charAt(i) + " is:" + count[worlds.charAt(i)]);
+        }
     }
 
 
@@ -119,9 +135,6 @@ public class TextAnalyzerMainApp {
                     //Te same informacje, które są wypisywane na ekran w punktach 2-5,
                     //zapisać do pliku statystyki.txt. Jeśli plik już istnieje - nadpisać.
                 case exit:
-                    //zad 8 TODO [Student B] Wyjście
-                    //Zakończyć program, usunąć plik tekstowy z punktu 1. (o ile był zapisany)
-                    //i usunąć plik statystyki.txt (o ile był zapisany).
                     deleteFile("plik.txt");
                     System.out.println("You've deleted the file");
                     break;
