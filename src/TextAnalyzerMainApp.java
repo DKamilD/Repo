@@ -134,6 +134,7 @@ public class TextAnalyzerMainApp {
                     //zapisać do pliku statystyki.txt. Jeśli plik już istnieje - nadpisać.
                 case exit:
                     deleteFile("plik.txt");
+                    deleteFile("statystyki.txt");
                     System.out.println("You've deleted the file");
                     break;
                 default:
