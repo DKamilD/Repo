@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class TextAnalyzerMainApp {
@@ -59,26 +60,23 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
-        int count[] = new int[MAX_CHAR];
-        int len = worlds.length();
-        for (int i = 0; i < len; i++)
-            count[worlds.charAt(i)]++;
-        char ch[] = new char[worlds.length()];
-        for (int i = 0; i < len; i++) {
-            ch[i] = worlds.charAt(i);
-            int find = 0;
-            for (int j = 0; j <= i; j++) {
+        char[] array = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
-                if (worlds.charAt(i) == ch[j])
-                    find++;
-            }
+        System.out.println("Please enter a sentence to parse.");
+        String userString = worlds;
 
-            if (find == 1)
-                System.out.println("Number of Occurrence of " +
-                        worlds.charAt(i) + " is:" + count[worlds.charAt(i)]);
+        HashMap<Character, Integer> charint = new HashMap<>();
+
+        for (Character c : userString.toCharArray()){
+            if (charint.containsKey(c)) charint.replace(c, charint.get(c).intValue() + 1);
+            else charint.put(c, 1);
+        }
+
+        for (int i = 0 ; i < array.length ; i++){
+            System.out.println(array[i] + " : " + (charint.get(array[i]) == null ? "0" : charint.get(array[i])));
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         final int downloadFile = 1;
