@@ -28,9 +28,16 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
-        String[] w = worlds.split("");
-        return w.length;
+        int characters = 0;
+        for (int i = 0, length = worlds.length(); i < length; i++) {
+            if (worlds.charAt(i) != ' ') {
+                characters++;
+            }
+        }
+        return characters;
+
     }
+
     private static int countWords() {
         String file = "plik.txt";
         String worlds = null;
@@ -42,7 +49,8 @@ public class TextAnalyzerMainApp {
         String[] w = worlds.split("\\s");
         return w.length;
     }
-    private static int generateLettersRaport() {
+
+    private static void generateLettersRaport() {
         String file = "plik.txt";
         String worlds = null;
         try {
@@ -50,9 +58,12 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
-        String[] w = worlds.split("a");
-        return w.length;
+
+        //String[] w = worlds.split("a");
+        //return w.length;
     }
+
+
     public static void main(String[] args) throws IOException {
         final int downloadFile = 1;
         final int countNumberOfLetters = 2;
@@ -101,7 +112,7 @@ public class TextAnalyzerMainApp {
                     //został pobrany, zwrócić błąd.
                     break;
                 case generateLettersRaport:
-                    System.out.println(generateLettersRaport());
+                    generateLettersRaport();
                     break;
                 case saveStats:
                     //zad 7 TODO 7. [Student C] Zapisać plik ze statystykami.
