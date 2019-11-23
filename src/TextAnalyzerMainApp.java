@@ -77,6 +77,43 @@ public class TextAnalyzerMainApp {
             System.out.println(array[i] + " : " + (charint.get(array[i]) == null ? "0" : charint.get(array[i])));
         }
     }
+    public static int countPuncMarks() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+
+        int countPuncMark = 0;
+        for (int i = 0, length = worlds.length(); i < length; i++) {
+            if (worlds.charAt(i) == '!' || worlds.charAt(i) ==',' || worlds.charAt(i) == ';' || worlds.charAt(i) == '.'|| worlds.charAt(i) == '?'|| worlds.charAt(i) == '-' ||
+                    worlds.charAt(i) == '\'' || worlds.charAt(i) == '\"' || worlds.charAt(i) == ':') {
+                countPuncMark++;
+            }
+        }
+
+        return countPuncMark;
+
+    }
+    public static int countChar() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+
+        int countChar = 0;
+        for (int i = 0, length = worlds.length(); i < length; i++) {
+            if (worlds.charAt(i) == '.') {
+                countChar++;
+            }
+        }
+        return countChar;
+    }
 
     public static void main(String[] args) throws IOException {
         final int downloadFile = 1;
@@ -116,14 +153,10 @@ public class TextAnalyzerMainApp {
                     System.out.println(countWords());
                     break;
                 case countNumberOfPunctuationMarks:
-                    //zad 4 TODO 4. [Student C] Liczba znaków interpunkcyjnych
-                    //Wypisać na ekran ile znaków interpunkcyjnych znajduje się w pobranym
-                    //pliku. Jeśli plik nie został pobrany, zwrócić błąd.
+                    System.out.println(countPuncMarks());
                     break;
                 case countNumberOfPhrases:
-                    //zad 5 TODO 5. [Student C] Liczba zdań w pliku
-                    //Wypisać na ekran ile zdań znajduje się w pobranym pliku. Jeśli plik nie
-                    //został pobrany, zwrócić błąd.
+                    System.out.println(countChar());.
                     break;
                 case generateLettersRaport:
                     generateLettersRaport();
