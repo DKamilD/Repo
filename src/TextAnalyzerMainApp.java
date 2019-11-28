@@ -89,7 +89,6 @@ public class TextAnalyzerMainApp {
         for (int i = 0, length = worlds.length(); i < length; i++) {
             if (worlds.charAt(i) == ',' ||  worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
                 countPuncMark++;
-
             }
         }
 
