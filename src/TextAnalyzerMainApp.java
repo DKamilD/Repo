@@ -1,4 +1,3 @@
-package src;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,8 +87,7 @@ public class TextAnalyzerMainApp {
 
         int countPuncMark = 0;
         for (int i = 0, length = worlds.length(); i < length; i++) {
-            if (worlds.charAt(i) == '!' || worlds.charAt(i) ==',' || worlds.charAt(i) == ';' || worlds.charAt(i) == '.'|| worlds.charAt(i) == '?'|| worlds.charAt(i) == '-' ||
-                    worlds.charAt(i) == '\'' || worlds.charAt(i) == '\"' || worlds.charAt(i) == ':') {
+            if (worlds.charAt(i) == ',' ||  worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
                 countPuncMark++;
             }
         }
@@ -156,7 +154,7 @@ public class TextAnalyzerMainApp {
                     System.out.println(countPuncMarks());
                     break;
                 case countNumberOfPhrases:
-                    System.out.println(countChar());.
+                    System.out.println(countChar());
                     break;
                 case generateLettersRaport:
                     generateLettersRaport();
