@@ -50,6 +50,18 @@ public class TextAnalyzerMainApp {
         return w.length;
     }
 
+    private static int countSentence() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+        String[] w = worlds.split("[.]");
+        return w.length + 1;
+    }
+
     private static void generateLettersRaport() {
         final int MAX_CHAR = 256;
         String file = "plik.txt";
@@ -59,23 +71,52 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
-        char[] array = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-                'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+        char[] array = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
         System.out.println("Please enter a sentence to parse.");
         String userString = worlds;
-
+        System.out.println("samogloski = " + countVowel(userString));
+        System.out.println("Spolgloski = " + countConsonant(userString));
+        System.out.println("Liczba wyrazow: " + countWords());
+        System.out.println("Liczba zdań: " + countSentence());
         HashMap<Character, Integer> charint = new HashMap<>();
 
-        for (Character c : userString.toCharArray()){
+        for (Character c : userString.toCharArray()) {
             if (charint.containsKey(c)) charint.replace(c, charint.get(c).intValue() + 1);
             else charint.put(c, 1);
         }
 
-        for (int i = 0 ; i < array.length ; i++){
+        for (int i = 0; i < array.length; i++) {
             System.out.println(array[i] + " : " + (charint.get(array[i]) == null ? "0" : charint.get(array[i])));
         }
+
     }
+
+    public static int countVowel(String z) {
+        char n;
+        int vowel = 0;
+        for (int i = 0; i < z.length(); i++) {
+            n = z.charAt(i);
+            if (Character.toString(n).matches("[AEYUIOaeyuio]")) {
+                vowel++;
+            }
+        }
+        return vowel;
+    }
+
+    public static int countConsonant(String z) {
+        char n;
+        int col = 0;
+        for (int i = 0; i < z.length(); i++) {
+            n = z.charAt(i);
+            if (Character.toString(n).matches("[a-zA-Z&&[^aeyuioAEYUIO]]")) {
+                col++;
+            }
+        }
+        return col;
+    }
+
     public static int countPuncMarks() {
         String file = "plik.txt";
         String worlds = null;
@@ -87,7 +128,7 @@ public class TextAnalyzerMainApp {
 
         int countPuncMark = 0;
         for (int i = 0, length = worlds.length(); i < length; i++) {
-            if (worlds.charAt(i) == ',' ||  worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
+            if (worlds.charAt(i) == ',' || worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
                 countPuncMark++;
 
             }
@@ -96,6 +137,7 @@ public class TextAnalyzerMainApp {
         return countPuncMark;
 
     }
+
     public static int countChar() {
         String file = "plik.txt";
         String worlds = null;
