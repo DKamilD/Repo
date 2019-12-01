@@ -28,12 +28,6 @@ public class TextAnalyzerMainApp {
                 e.printStackTrace();
             }
             //  URL website = new URL("https://s3.zylowski.net/public/input/7.txt");
-            // try (InputStream in = website.openStream()) {
-            //     Files.copy(in, Path.of("plik.txt"));
-            // } catch (IOException e) {
-            //     System.out.println("URL isn't correct");
-            //     e.printStackTrace();
-            //   }
         } else if (select.equals("n") || select.equals("N")) {
             System.out.println("Enter file name: ");
             String fileName = sc.nextLine();
