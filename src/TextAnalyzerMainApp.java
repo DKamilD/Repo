@@ -53,6 +53,22 @@ public class TextAnalyzerMainApp {
         } catch (IOException e) {
             throw new NullPointerException("File not found");
         }
+        int vowels = 0;
+        int consonants = 0;
+
+        for (int i = 0, length = worlds.length(); i < length; i++) {
+            if (worlds.equals("a") || worlds.equals("e") ||
+                    worlds.equals("i") || worlds.equals("o") ||
+                    worlds.equals("u")) {
+
+                vowels++;
+            } else {
+                consonants++;
+
+            }
+            System.out.print("The number of vowels is " + vowels);
+            System.out.print(" The number of consonants is " + consonants);
+        }
         int characters = 0;
         for (int i = 0, length = worlds.length(); i < length; i++) {
             if (worlds.charAt(i) != ' ') {
