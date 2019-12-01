@@ -1,4 +1,3 @@
-package src;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -163,6 +162,25 @@ public class TextAnalyzerMainApp {
 
     }
 
+    public static int countPuncMarks() {
+        String file = "plik.txt";
+        String worlds = null;
+        try {
+            worlds = new String(Files.readAllBytes(Path.of(file)));
+        } catch (IOException e) {
+            throw new NullPointerException("File not found");
+        }
+
+        int countPuncMark = 0;
+        for (int i = 0, length = worlds.length(); i < length; i++) {
+            if (worlds.charAt(i) == ',' ||  worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
+                countPuncMark++;
+            }
+        }
+
+        return countPuncMark;
+
+    }
     public static int countChar() {
         String file = "plik.txt";
         String worlds = null;
@@ -174,7 +192,7 @@ public class TextAnalyzerMainApp {
 
         int countChar = 0;
         for (int i = 0, length = worlds.length(); i < length; i++) {
-            if (worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
+            if (worlds.charAt(i) == '.') {
                 countChar++;
             }
         }
