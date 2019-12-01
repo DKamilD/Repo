@@ -27,7 +27,7 @@ public class TextAnalyzerMainApp {
                 System.out.println("URL address isn't correct");
                 e.printStackTrace();
             }
-            //  URL website = new URL("https://s3.zylowski.net/public/input/7.txt");
+            // https://s3.zylowski.net/public/input/7.txt
         } else if (select.equals("n") || select.equals("N")) {
             System.out.println("Enter file name: ");
             String fileName = sc.nextLine();
