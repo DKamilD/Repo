@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class TextAnalyzerMainApp {
 
+
     private static void chooseFile() throws MalformedURLException, FileNotFoundException {
 
         System.out.println("Download file from internet? [Y/N]");
