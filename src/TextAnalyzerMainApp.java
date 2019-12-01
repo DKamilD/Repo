@@ -1,29 +1,53 @@
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class TextAnalyzerMainApp {
-    private static void downloadFile() throws MalformedURLException {
 
-        URL website = new URL("https://s3.zylowski.net/public/input/7.txt");
-        try (InputStream in = website.openStream()) {
-            Files.copy(in, Path.of("plik.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static void chooseFile() throws MalformedURLException, FileNotFoundException {
+
+        System.out.println("Download file from internet? [Y/N]");
+        Scanner sc = new Scanner(System.in);
+        String select = sc.nextLine();
+        if (select.equals("y") || select.equals("Y")) {
+            System.out.println("Enter URL address: ");
+            String urlAddress = sc.nextLine();
+            URL web = new URL(urlAddress);
+            try (InputStream in = web.openStream()) {
+                Files.copy(in, Path.of("plik.txt"));
+            } catch (IOException e) {
+                System.out.println("URL address isn't correct");
+                e.printStackTrace();
+            }
+            // https://s3.zylowski.net/public/input/7.txt
+        } else if (select.equals("n") || select.equals("N")) {
+            System.out.println("Enter file name: ");
+            String fileName = sc.nextLine();
+            try {
+                FileReader fr = new FileReader(fileName);
+                Files.copy(Paths.get(fileName), Path.of(fileName));
+            } catch (IOException e) {
+                System.out.println("File isn't exist");
+                e.printStackTrace();
+            }
+
+        } else {
+            System.out.println("Pick correct option next time. ");
         }
+
     }
 
     private static int countChars() {
         String file = "plik.txt";
         String worlds = null;
         try {
+
             worlds = new String(Files.readAllBytes(Path.of(file)));
         } catch (IOException e) {
             throw new NullPointerException("File not found");
@@ -117,6 +141,7 @@ public class TextAnalyzerMainApp {
         return col;
     }
 
+
     public static int countPuncMarks() {
         String file = "plik.txt";
         String worlds = null;
@@ -130,7 +155,6 @@ public class TextAnalyzerMainApp {
         for (int i = 0, length = worlds.length(); i < length; i++) {
             if (worlds.charAt(i) == ',' || worlds.charAt(i) == '.' || worlds.charAt(i) == '?') {
                 countPuncMark++;
-
             }
         }
 
@@ -138,23 +162,6 @@ public class TextAnalyzerMainApp {
 
     }
 
-    public static int countChar() {
-        String file = "plik.txt";
-        String worlds = null;
-        try {
-            worlds = new String(Files.readAllBytes(Path.of(file)));
-        } catch (IOException e) {
-            throw new NullPointerException("File not found");
-        }
-
-        int countChar = 0;
-        for (int i = 0, length = worlds.length(); i < length; i++) {
-            if (worlds.charAt(i) == '.') {
-                countChar++;
-            }
-        }
-        return countChar;
-    }
     public static int countPuncMarks() {
         String file = "plik.txt";
         String worlds = null;
@@ -193,7 +200,7 @@ public class TextAnalyzerMainApp {
     }
 
     public static void main(String[] args) throws IOException {
-        final int downloadFile = 1;
+        final int chooseFile = 1;
         final int countNumberOfLetters = 2;
         final int countNumberOfWords = 3;
         final int countNumberOfPunctuationMarks = 4;
@@ -207,7 +214,7 @@ public class TextAnalyzerMainApp {
         while (option != exit) {
             System.out.println("Options: ");
             System.out.println("0 - Exit");
-            System.out.println("1 - Download file from Internet");
+            System.out.println("1 - Choose enter file");
             System.out.println("2 - Count number of letters");
             System.out.println("3 - Count number of words");
             System.out.println("4 - Count number of punctuation marks");
@@ -220,8 +227,8 @@ public class TextAnalyzerMainApp {
             option = input.nextInt();
             input.nextLine();
             switch (option) {
-                case downloadFile:
-                    downloadFile();
+                case chooseFile:
+                    chooseFile();
                     break;
                 case countNumberOfLetters:
                     System.out.println(countChars());
